@@ -1,0 +1,16 @@
+# Ignore SQLite databases
+*.db
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+
+# Ignore virtual environments
+venv/
+.env/
+
+# Ignore logs
+*.log
+
+# Ignore OS junk
+.DS_Store
