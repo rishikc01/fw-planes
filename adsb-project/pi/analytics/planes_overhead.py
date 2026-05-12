@@ -1,21 +1,16 @@
 import time
-from typing import List, Dict, Any
-from backend.db.adsb_database import ADSBDatabase
 
-def planes_overhead_now(db: ADSBDatabase, window_seconds: int = 30) -> List[Dict[str, Any]]:
+def planes_overhead_now(db, window_seconds: int = 60):
     """
-    Returns all aircraft seen in the last `window_seconds`.
-    This represents "planes overhead right now".
+    Returns all aircraft seen in the last <window_seconds>.
     """
-    current_time = time.time()
-    cutoff = current_time - window_seconds
+    cutoff = time.time() - window_seconds
 
-    cur = db.conn.cursor()
-    cur.execute("""
-        SELECT icao, callsign, lat, lon, altitude, speed, heading, timestamp
+    rows = db.query("""
+        SELECT *
         FROM adsb_messages
         WHERE timestamp >= ?
+        ORDER BY timestamp DESC
     """, (cutoff,))
 
-    rows = cur.fetchall()
-    return [dict(row) for row in rows]
+    return rows
