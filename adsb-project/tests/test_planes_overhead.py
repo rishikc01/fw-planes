@@ -4,9 +4,9 @@ import time
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from backend.db.adsb_database import ADSBDatabase
+from pi.db.adsb_database import ADSBDatabase
 
-from backend.analytics.planes_overhead import planes_overhead_now
+from pi.analytics.planes_overhead import planes_overhead_now
 
 db = ADSBDatabase()
 
